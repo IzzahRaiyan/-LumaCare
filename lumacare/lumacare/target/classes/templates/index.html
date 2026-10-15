@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumaCare - Emergency Support</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6fa;
+            color: #202b3c;
+        }
+
+        header {
+            background-color: #14243a;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 27px;
+        }
+
+        header span {
+            color: #f6c453;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            color: #d2dbea;
+        }
+
+        nav {
+            background-color: #203650;
+            padding: 13px 7%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 24px;
+            font-size: 15px;
+        }
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #596579;
+            line-height: 1.6;
+        }
+
+        .alert-banner {
+            background-color: #fff0f0;
+            border-left: 5px solid #d9363e;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px #172b4d12;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #e6f7ed;
+            color: #187545;
+        }
+
+        .muted {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .sos-section {
+            text-align: center;
+            background-color: white;
+            padding: 30px 20px;
+            margin-top: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #172b4d12;
+        }
+
+        .sos-button {
+            background-color: #d9363e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 12px 0;
+        }
+
+        .sos-button:hover {
+            background-color: #b9232b;
+        }
+
+        .secondary-button {
+            padding: 11px 16px;
+            background-color: #203650;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .contact {
+            margin-top: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            background-color: #14243a;
+            color: #d2dbea;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid #f6c453;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>☀ Luma<span>Care</span></h1>
+        <p>Emergency Support During Power Outages</p>
+    </div>
+    <div>Accessible Care • Reliable Support</div>
+</header>
+
+<nav aria-label="Main navigation">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#devices">Device Status</a>
+    <a href="#contacts">Emergency Contacts</a>
+</nav>
+
+<main>
+    <section class="welcome">
+        <h2>Your Safety Comes First</h2>
+        <p>
+            Quick emergency assistance for wheelchair users and people
+            who depend on electrically powered medical devices.
+        </p>
+    </section>
+
+    <section class="alert-banner">
+        <strong>⚠ Emergency Ready</strong><br>
+        Check your device status and keep your emergency contacts accessible.
+        If you need urgent assistance, use the SOS button below.
+    </section>
+
+    <section class="dashboard" id="dashboard">
+
+        <div class="card">
+            <h3>⚡ Power Status</h3>
+            <p class="status" id="powerStatus">Power Available</p>
+            <p class="muted">Demo status only. No live power sensor is connected.</p>
+            <button class="secondary-button" onclick="togglePower()">
+                Change Demo Status
+            </button>
+        </div>
+
+        <div class="card" id="devices">
+            <h3>♿ Essential Device</h3>
+            <p><strong>Device:</strong> Powered Mobility Device</p>
+            <p class="status" id="deviceStatus">Device Available</p>
+            <p class="muted">Demo device status. Not connected to actual equipment.</p>
+            <button class="secondary-button" onclick="toggleDevice()">
+                Change Demo Status
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔋 Backup Power</h3>
+            <p><strong>Battery level:</strong> <span id="batteryLevel">100%</span></p>
+            <p class="muted">
+                Example battery level for demonstration; it is not a live reading.
+            </p>
+            <button class="secondary-button" onclick="changeBattery()">
+                Update Demo Battery
+            </button>
+        </div>
+
+    </section>
+
+    <section class="sos-section">
+        <h2>Need Emergency Assistance?</h2>
+        <p>Press the button to submit a demo emergency request to the Java backend.</p>
+
+        <button class="sos-button" id="sosButton" onclick="sendSOS()">
+            🆘 SEND SOS
+        </button>
+
+        <p id="sosMessage" role="status" aria-live="polite">
+            No emergency request submitted.
+        </p>
+        <p class="muted">
+            This prototype processes a request through Java but does not contact
+            emergency services or send messages to caregivers.
+        </p>
+    </section>
+
+    <section class="card contact" id="contacts">
+        <h3>📞 Emergency Contacts</h3>
+        <p class="muted">
+            Keep your trusted caregiver and local emergency numbers available.
+        </p>
+
+        <label for="contactName">Caregiver name:</label><br>
+        <input id="contactName" type="text"
+               placeholder="Enter caregiver name"
+               style="padding:10px; margin:10px 0; max-width:100%;">
+
+        <br>
+
+        <label for="contactNumber">Phone number:</label><br>
+        <input id="contactNumber" type="tel"
+               placeholder="Enter phone number"
+               style="padding:10px; margin:10px 0; max-width:100%;">
+
+        <br>
+
+        <button class="secondary-button" onclick="saveContact()">
+            Save Contact on This Page
+        </button>
+
+        <p id="contactMessage" role="status" aria-live="polite"></p>
+    </section>
+
+</main>
+
+<footer>
+    <p>LumaCare — Bringing light, support, and safety when it matters most.</p>
+    <p>Designed for accessibility and emergency preparedness.</p>
+</footer>
+
+<script>
+    function togglePower() {
+        var status = document.getElementById("powerStatus");
+
+        if (status.innerText === "Power Available") {
+            status.innerText = "Power Outage";
+            status.style.backgroundColor = "#fff0f0";
+            status.style.color = "#b42318";
+        } else {
+            status.innerText = "Power Available";
+            status.style.backgroundColor = "#e6f7ed";
+            status.style.color = "#187545";
+        }
+    }
+
+    function toggleDevice() {
+        var status = document.getElementById("deviceStatus");
+
+        if (status.innerText === "Device Available") {
+            status.innerText = "Device Offline";
+            status.style.backgroundColor = "#fff0f0";
+            status.style.color = "#b42318";
+        } else {
+            status.innerText = "Device Available";
+            status.style.backgroundColor = "#e6f7ed";
+            status.style.color = "#187545";
+        }
+    }
+
+    function changeBattery() {
+        var battery = document.getElementById("batteryLevel");
+        var level = parseInt(battery.innerText);
+
+        if (level <= 10) {
+            level = 100;
+        } else {
+            level = level - 10;
+        }
+
+        battery.innerText = level + "%";
+    }
+
+    function saveContact() {
+        var name = document.getElementById("contactName").value.trim();
+        var number = document.getElementById("contactNumber").value.trim();
+        var message = document.getElementById("contactMessage");
+
+        if (name === "" || number === "") {
+            message.innerText = "Please enter both a name and phone number.";
+            return;
+        }
+
+        localStorage.setItem("caregiverName", name);
+        localStorage.setItem("caregiverNumber", number);
+
+        message.innerText =
+            "Contact saved successfully! Caregiver: " + name +
+            ", Phone: " + number;
+    }
+
+    async function sendSOS() {
+        var message = document.getElementById("sosMessage");
+        var button = document.getElementById("sosButton");
+        var name = localStorage.getItem("caregiverName");
+        var number = localStorage.getItem("caregiverNumber");
+
+        if (!name || !number) {
+            message.innerText =
+                "Please save the caregiver name and phone number first.";
+            return;
+        }
+
+        button.disabled = true;
+        message.innerText = "Sending SOS request to the Java backend...";
+
+        try {
+            var response = await fetch("/send-sos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: number
+                })
+            });
+
+            var result = await response.json();
+
+            if (response.ok && result.status === "success") {
+                message.innerText =
+                    "SOS request processed at " + result.time +
+                    ". Caregiver: " + result.caregiver +
+                    ". Phone: " + result.phone +
+                    ". ";
+            } else {
+                message.innerText =
+                    result.message || "Unable to process SOS request.";
+            }
+        } catch (error) {
+            message.innerText =
+                "Could not connect to the Java backend. " +
+                "Check that LumaCare is running and try again.";
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+    window.onload = function() {
+        var name = localStorage.getItem("caregiverName");
+        var number = localStorage.getItem("caregiverNumber");
+
+        if (name && number) {
+            document.getElementById("contactName").value = name;
+            document.getElementById("contactNumber").value = number;
+
+            document.getElementById("contactMessage").innerText =
+                "Saved contact: " + name + ", Phone: " + number;
+        }
+    };
+</script>
+
+</body>
+</html>
+
